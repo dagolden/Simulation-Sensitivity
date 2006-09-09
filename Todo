@@ -1,0 +1,15 @@
+TODO list for Perl module Simulation::Sensitivity
+
+- Nothing right now
+
+
+Speculative stuff:
+
+- Consider renaming distribution to Simulation::Lab
+- Consider renaming to Sim?
+    - Sim::Sensitivity
+    - Sim::MonteCarlo
+    - Sim::Scenario
+    - Random::OO::Range, ::Range::Int, ::Resample, ::Normal, ::LogNormal
+    - Sim::Report
+
