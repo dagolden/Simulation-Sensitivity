@@ -8,7 +8,7 @@ Module::Build->new(
     create_readme       => 1,
     create_makefile_pl  => 'traditional',
     requires        => {
-        Class::Accessor => 0,
+        Class::Accessor::Fast => 0,
         Params::Validate => 0,
         Test::More => 0.45, # thread-safe
     },

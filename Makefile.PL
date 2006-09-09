@@ -10,7 +10,7 @@ WriteMakefile
           'PREREQ_PM' => {
                            'Test::More' => '0.45',
                            'Params::Validate' => 0,
-                           'Class::Accessor' => 0
+                           'Class::Accessor::Fast' => 0
                          }
         )
 ;
