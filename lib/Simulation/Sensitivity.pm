@@ -1,8 +1,7 @@
 package Simulation::Sensitivity;
 use strict;
-use warnings;
 use vars qw ($VERSION);
-$VERSION = "0.1";
+$VERSION = "0.10";
 
 # Required modules
 use Carp;
@@ -84,7 +83,7 @@ As a constructor, C<new> returns a Simulation::Sensitivity object.
     sub new {
         my $class = shift;
         my %params = validate( @_, $param_spec );
-        my $self = bless ({%params}, ref ($class) || $class);
+        my $self = bless ({%params}, $class);
         return $self;
     }
 
@@ -225,18 +224,25 @@ __END__
 
 =head1 BUGS
 
-Please report bugs using the CPAN Request Tracker at 
-http://rt.cpan.org/NoAuth/Bugs.html?Dist=Simulation-Sensitivity
+Please report any bugs or feature using the CPAN Request Tracker.  
+Bugs can be submitted by email to C<bug-Simulation-Sensitivity@rt.cpan.org> or 
+through the web interface at 
+L<http://rt.cpan.org/Public/Dist/Display.html?Name=Simulation-Sensitivity>
+
+When submitting a bug or request, please include a test-file or a patch to an
+existing test-file that illustrates the bug or desired feature.
 
 =head1 AUTHOR
 
- David A. Golden (DAGOLDEN)
- dagolden@dagolden.com
- http://dagolden.com/
+David A Golden (DAGOLDEN)
+
+dagolden@cpan.org
+
+L<http://dagolden.com/>
 
 =head1 COPYRIGHT
 
-Copyright (c) 2004 by David A. Golden
+Copyright (c) 2006 by David A Golden
 
 This program is free software; you can redistribute
 it and/or modify it under the same terms as Perl itself.
@@ -244,9 +250,27 @@ it and/or modify it under the same terms as Perl itself.
 The full text of the license can be found in the
 LICENSE file included with this module.
 
+=head1 DISCLAIMER OF WARRANTY
 
-=head1 SEE ALSO
+BECAUSE THIS SOFTWARE IS LICENSED FREE OF CHARGE, THERE IS NO WARRANTY
+FOR THE SOFTWARE, TO THE EXTENT PERMITTED BY APPLICABLE LAW. EXCEPT WHEN
+OTHERWISE STATED IN WRITING THE COPYRIGHT HOLDERS AND/OR OTHER PARTIES
+PROVIDE THE SOFTWARE "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER
+EXPRESSED OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. THE
+ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE SOFTWARE IS WITH
+YOU. SHOULD THE SOFTWARE PROVE DEFECTIVE, YOU ASSUME THE COST OF ALL
+NECESSARY SERVICING, REPAIR, OR CORRECTION.
 
-perl(1).
+IN NO EVENT UNLESS REQUIRED BY APPLICABLE LAW OR AGREED TO IN WRITING
+WILL ANY COPYRIGHT HOLDER, OR ANY OTHER PARTY WHO MAY MODIFY AND/OR
+REDISTRIBUTE THE SOFTWARE AS PERMITTED BY THE ABOVE LICENCE, BE
+LIABLE TO YOU FOR DAMAGES, INCLUDING ANY GENERAL, SPECIAL, INCIDENTAL,
+OR CONSEQUENTIAL DAMAGES ARISING OUT OF THE USE OR INABILITY TO USE
+THE SOFTWARE (INCLUDING BUT NOT LIMITED TO LOSS OF DATA OR DATA BEING
+RENDERED INACCURATE OR LOSSES SUSTAINED BY YOU OR THIRD PARTIES OR A
+FAILURE OF THE SOFTWARE TO OPERATE WITH ANY OTHER SOFTWARE), EVEN IF
+SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE POSSIBILITY OF
+SUCH DAMAGES.
 
 =cut

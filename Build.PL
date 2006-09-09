@@ -1,14 +1,15 @@
 use Module::Build;
 # See perldoc Module::Build for details of how this works
 
-Module::Build->new
-    ( module_name     => 'Simulation::Sensitivity',
-      create_makefile_pl => "passthrough",
-      license         => 'perl',
-	  requires        => {
-	                       # module requirements here
-	                     },
-	  build_requires  => { 
-	                       Test::Simple => 0.53,
-	                     },
-	)->create_build_script;
+Module::Build->new( 
+    module_name     => 'Simulation::Sensitivity',
+    dist_author         => 'David A Golden <dagolden@cpan.org>',
+    license             => 'perl',
+    create_readme       => 1,
+    create_makefile_pl  => 'traditional',
+    requires        => {
+        Class::Accessor => 0,
+        Params::Validate => 0,
+        Test::More => 0.45, # thread-safe
+    },
+)->create_build_script;

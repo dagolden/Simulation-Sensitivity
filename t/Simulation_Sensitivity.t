@@ -1,13 +1,10 @@
 #!/usr/bin/perl
 use strict;
-use warnings;
 use blib;  
 
 # Simulation::Sensitivity  
 
 use Test::More tests =>  10 ;
-use Test::Exception;
-use Data::Dumper;
 
 BEGIN { use_ok( 'Simulation::Sensitivity' ); }
 
@@ -30,8 +27,10 @@ my $test_calc = sub {
 # Tests
 #--------------------------------------------------------------------------#
 
-dies_ok { Simulation::Sensitivity->new () } 
-        'new() dies without valid parameters';
+eval { Simulation::Sensitivity->new () };
+ok( defined $@,
+    'new() dies without valid parameters'
+);
 
 ok (my $obj = Simulation::Sensitivity->new(
         calculation => $test_calc,
@@ -84,5 +83,8 @@ my $bad_base_obj = Simulation::Sensitivity->new(
     delta => .25);
 
 is ($bad_base_obj->base, 0, 'setting up a simulation with base case of 0');
-dies_ok {$bad_base_obj->text_report} 'text_report dies with base case of 0';
+eval {$bad_base_obj->text_report};
+ok( defined $@,
+    'text_report dies with base case of 0'
+);
 
