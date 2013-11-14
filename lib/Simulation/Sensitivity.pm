@@ -70,16 +70,16 @@ As a constructor, C<new> returns a Simulation::Sensitivity object.
 {
     my $param_spec = {
         calculation => { type => CODEREF },
-        parameters => { type => HASHREF },
-        delta => { type => SCALAR }
+        parameters  => { type => HASHREF },
+        delta       => { type => SCALAR }
     };
 
     __PACKAGE__->mk_accessors( keys %$param_spec );
 
     sub new {
-        my $class = shift;
+        my $class  = shift;
         my %params = validate( @_, $param_spec );
-        my $self = bless ({%params}, $class);
+        my $self   = bless( {%params}, $class );
         return $self;
     }
 
@@ -100,7 +100,6 @@ accessor sets the value to the new value and returns the new value.
 
 =cut 
 
-
 #--------------------------------------------------------------------------#
 # base()
 #--------------------------------------------------------------------------#
@@ -117,8 +116,8 @@ in the constructor.
 =cut
 
 sub base {
-	my ($self) = @_;
-    return $self->calculation->( { %{$self->parameters }} );	
+    my ($self) = @_;
+    return $self->calculation->( { %{ $self->parameters } } );
 }
 
 #--------------------------------------------------------------------------#
@@ -151,33 +150,31 @@ example would be:
 =cut
 
 sub run {
-	my ($self) = @_;
+    my ($self) = @_;
     my $results;
-    
-    for my $key ( keys %{$self->parameters} ) {
+
+    for my $key ( keys %{ $self->parameters } ) {
         $results->{$key} = {};
         for my $mult ( 1, -1 ) {
-            my $p = { %{$self->parameters} };
-            $p->{$key} = (1 + $mult * $self->delta ) * 
-                         $self->parameters->{$key};
-            $results->{$key}->{$self->_case($mult)} = 
-                $self->calculation->($p);
+            my $p = { %{ $self->parameters } };
+            $p->{$key} = ( 1 + $mult * $self->delta ) * $self->parameters->{$key};
+            $results->{$key}->{ $self->_case($mult) } =
+              $self->calculation->($p);
         }
     }
     return $results;
 }
 
 #--------------------------------------------------------------------------#
-# _case ($mult, $result, $base) 
+# _case ($mult, $result, $base)
 #
 # private helper function to turn a +/-1 into a case label using the delta
 #--------------------------------------------------------------------------#
 
 sub _case {
-    my ($self, $mult) = @_;
-    return (($mult == 1) ? "+" : "-") . ($self->delta * 100) . "%";
+    my ( $self, $mult ) = @_;
+    return ( ( $mult == 1 ) ? "+" : "-" ) . ( $self->delta * 100 ) . "%";
 }
-
 
 #--------------------------------------------------------------------------#
 # text_report()
@@ -194,25 +191,23 @@ with C<run>.
 =cut
 
 sub text_report {
-	my ($self, $results) = @_;
-	my $base = $self->base;
-    croak "Simulation base case is zero/undefined.  Cannot generate report." 
-        unless $base;
-    my $report = sprintf("%12s %9s %9s\n",
-        "Parameter",
-        $self->_case(1),
-        $self->_case(-1)
-    );
-    $report .= sprintf( "-" x 36 . "\n");
-    for my $param (sort keys %$results) {
+    my ( $self, $results ) = @_;
+    my $base = $self->base;
+    croak "Simulation base case is zero/undefined.  Cannot generate report."
+      unless $base;
+    my $report =
+      sprintf( "%12s %9s %9s\n", "Parameter", $self->_case(1), $self->_case(-1) );
+    $report .= sprintf( "-" x 36 . "\n" );
+    for my $param ( sort keys %$results ) {
         my $cases = $results->{$param};
-        $report .= sprintf("%12s %+9.2f%% %+9.2f%%\n",
-            $param, 
-            ($cases->{$self->_case(1)}/$base -1 ) * 100, 
-            ($cases->{$self->_case(-1)}/$base -1 ) * 100,
+        $report .= sprintf(
+            "%12s %+9.2f%% %+9.2f%%\n",
+            $param,
+            ( $cases->{ $self->_case(1) } / $base - 1 ) * 100,
+            ( $cases->{ $self->_case(-1) } / $base - 1 ) * 100,
         );
     }
-    return $report; 
+    return $report;
 }
 
 1;
