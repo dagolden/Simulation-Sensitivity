@@ -1,12 +1,11 @@
-#!/usr/bin/perl
 use strict;
-use blib;  
+use warnings;
 
 # Simulation::Sensitivity  
 
 use Test::More tests =>  10 ;
 
-BEGIN { use_ok( 'Simulation::Sensitivity' ); }
+require_ok( 'Simulation::Sensitivity' );
 
 #--------------------------------------------------------------------------#
 # define a test calculation -- simple addition

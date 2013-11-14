@@ -1,7 +1,8 @@
 package Simulation::Sensitivity;
 use strict;
-use vars qw ($VERSION);
-$VERSION = "0.11";
+use warnings;
+# ABSTRACT: A general-purpose sensitivity analysis tool for user-supplied calculations and parameters
+# VERSION
 
 # Required modules
 use Carp;
@@ -13,11 +14,6 @@ use base qw( Class::Accessor::Fast );
 #--------------------------------------------------------------------------#
 # main pod documentation #####
 #--------------------------------------------------------------------------#
-
-=head1 NAME
-
-Simulation::Sensitivity - A general-purpose sensitivity analysis tool for 
-user-supplied calculations and parameters
 
 =head1 SYNOPSIS
 
@@ -64,7 +60,7 @@ C<calculation> must be a reference to a subroutine and is used for
 calculation.  It must adhere to the usage guidelines above for such 
 functions.  C<parameters> must be a reference to a hash that represents
 the initial starting parameters for the calculation.  C<delta> is a
-percentage that each parameter will be pertubed by during the analysis.  
+percentage that each parameter will be perturbed by during the analysis.  
 Percentages should be expressed as a decimal (0.1 to indicate 10%).  
 
 As a constructor, C<new> returns a Simulation::Sensitivity object.
@@ -98,7 +94,7 @@ As a constructor, C<new> returns a Simulation::Sensitivity object.
  $new_delta = $sim->delta(.15);
 
 The parameter values in a Simulation::Sensitivity object may be 
-retreived or modified using get/set accessors.  With no argument, the 
+retrieved or modified using get/set accessors.  With no argument, the 
 accessor returns the value of the parameter.  With an argument, the
 accessor sets the value to the new value and returns the new value.
 
@@ -208,7 +204,7 @@ sub text_report {
         $self->_case(-1)
     );
     $report .= sprintf( "-" x 36 . "\n");
-    for my $param (keys %$results) {
+    for my $param (sort keys %$results) {
         my $cases = $results->{$param};
         $report .= sprintf("%12s %+9.2f%% %+9.2f%%\n",
             $param, 
@@ -219,58 +215,4 @@ sub text_report {
     return $report; 
 }
 
-1; #this line is important and will help the module return a true value
-__END__
-
-=head1 BUGS
-
-Please report any bugs or feature using the CPAN Request Tracker.  
-Bugs can be submitted by email to C<bug-Simulation-Sensitivity@rt.cpan.org> or 
-through the web interface at 
-L<http://rt.cpan.org/Public/Dist/Display.html?Name=Simulation-Sensitivity>
-
-When submitting a bug or request, please include a test-file or a patch to an
-existing test-file that illustrates the bug or desired feature.
-
-=head1 AUTHOR
-
-David A Golden (DAGOLDEN)
-
-dagolden@cpan.org
-
-L<http://dagolden.com/>
-
-=head1 COPYRIGHT
-
-Copyright (c) 2006 by David A Golden
-
-This program is free software; you can redistribute
-it and/or modify it under the same terms as Perl itself.
-
-The full text of the license can be found in the
-LICENSE file included with this module.
-
-=head1 DISCLAIMER OF WARRANTY
-
-BECAUSE THIS SOFTWARE IS LICENSED FREE OF CHARGE, THERE IS NO WARRANTY
-FOR THE SOFTWARE, TO THE EXTENT PERMITTED BY APPLICABLE LAW. EXCEPT WHEN
-OTHERWISE STATED IN WRITING THE COPYRIGHT HOLDERS AND/OR OTHER PARTIES
-PROVIDE THE SOFTWARE "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER
-EXPRESSED OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
-WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. THE
-ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE SOFTWARE IS WITH
-YOU. SHOULD THE SOFTWARE PROVE DEFECTIVE, YOU ASSUME THE COST OF ALL
-NECESSARY SERVICING, REPAIR, OR CORRECTION.
-
-IN NO EVENT UNLESS REQUIRED BY APPLICABLE LAW OR AGREED TO IN WRITING
-WILL ANY COPYRIGHT HOLDER, OR ANY OTHER PARTY WHO MAY MODIFY AND/OR
-REDISTRIBUTE THE SOFTWARE AS PERMITTED BY THE ABOVE LICENCE, BE
-LIABLE TO YOU FOR DAMAGES, INCLUDING ANY GENERAL, SPECIAL, INCIDENTAL,
-OR CONSEQUENTIAL DAMAGES ARISING OUT OF THE USE OR INABILITY TO USE
-THE SOFTWARE (INCLUDING BUT NOT LIMITED TO LOSS OF DATA OR DATA BEING
-RENDERED INACCURATE OR LOSSES SUSTAINED BY YOU OR THIRD PARTIES OR A
-FAILURE OF THE SOFTWARE TO OPERATE WITH ANY OTHER SOFTWARE), EVEN IF
-SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE POSSIBILITY OF
-SUCH DAMAGES.
-
-=cut
+1;
