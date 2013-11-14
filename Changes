@@ -4,6 +4,8 @@ Revision history for Perl module Simulation::Sensitivity
 
     - fixed test failures under hash randomization
 
+    - modernized distribution metadata
+
     - converted release process to Dist::Zilla 
 
 0.11 Fri Jul 21 06:47:18 EDT 2006
