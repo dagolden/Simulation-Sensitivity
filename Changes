@@ -2,6 +2,8 @@ Revision history for Perl module Simulation::Sensitivity
 
 {{$NEXT}}
 
+0.12      2013-11-13 20:24:46 America/New_York
+
     - fixed test failures under hash randomization
 
     - modernized distribution metadata
